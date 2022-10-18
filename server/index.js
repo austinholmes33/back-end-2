@@ -8,11 +8,11 @@ app.use(express.json())
 
 //endpoints
 
-const {getHouses, createHouse, updateHouse, deleteHouse} = require('./controller.js')
+const {getAllHouses, createHouse, updateHouse, deleteHouse} = require('./controller.js')
 
-app.get('/api/houses', getHouses)
+app.get('/api/houses', getAllHouses)
 app.delete('/api/houses/:id', deleteHouse)
 app.put('/api/houses/:id', updateHouse)
 app.post('/api/houses', createHouse)
 
-app.listen(4000, () => {console.log('Server running on 4040')})
+app.listen(4004, () => {console.log('Server running on 4004')})

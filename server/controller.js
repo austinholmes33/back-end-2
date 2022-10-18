@@ -2,7 +2,7 @@ const houses = require('./db.json')
 const upcoming = 4
 
 module.exports = {
-    getHouses: (req, res) => {
+    getAllHouses: (req, res) => {
         res.status(200).send(houses)
     },
     deleteHouse: (req, res) => {
@@ -13,6 +13,17 @@ module.exports = {
     },
     updateHouse: (req, res) => {
         const updateId = req.params.id
+        let type = req.body.type
+        let index = houses.findIndex(element => element.id === +updateId)
+        if (type === 'plus') {
+            houses[index].price += 10000
+            res.status(200).send(houses)
+        } else if (type === 'minus') {
+            houses[index].price -= 10000
+            res.status(200).send(houses)
+        } else {
+            res.sendStatus(400)
+        }
     },
     createHouse: (req, res) => {
         const {address, price, imageURL} = req.body
@@ -24,6 +35,7 @@ module.exports = {
         }
         houses.push(newHouse)
         res.status(200).send(houses)
+        upcoming++
     }, 
     
 }
